@@ -8,6 +8,7 @@ using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using OfficeOpenXml;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +25,7 @@ Log.Logger = new LoggerConfiguration()
 
 // Serilog'u default logging provider olarak ekle
 builder.Host.UseSerilog();
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews(config =>

@@ -1,10 +1,13 @@
 ﻿using BusinessLayer.Abstract;
+using BusinessLayer.ValidationRules;
 using EntityLayer.Concrete;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TraversalCoreProje.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Route("Admin/Guide")]
     public class GuideController : Controller
     {
         private readonly IGuideService _guideService;
@@ -14,25 +17,45 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
             _guideService = guideService;
         }
 
+
+        [Route("")]
+        [Route("Index")]
         public IActionResult Index()
         {
             var values = _guideService.TGetList();
             return View(values);
         }
 
+        [Route("AddGuide")]
         [HttpGet]
         public IActionResult AddGuide()
         {
             return View();
         }
 
+        [Route("AddGuide")]
         [HttpPost]
         public IActionResult AddGuide(Guide p)
         {
-            _guideService.TAdd(p);
-            return RedirectToAction("Index");
+            GuideValidator validationRules = new GuideValidator();
+            ValidationResult validationResult = validationRules.Validate(p);
+            if (validationResult.IsValid)
+            {
+                _guideService.TAdd(p);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                foreach(var item in validationResult.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+                return View();
+            }
+
         }
 
+        [Route("EditGuide")]
         [HttpGet]
         public IActionResult EditGuide(int id)
         {
@@ -40,6 +63,8 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
             return View(value);
         }
 
+
+        [Route("EditGuide")]
         [HttpPost]
         public IActionResult EditGuide(Guide p)
         {
@@ -47,14 +72,18 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        [Route("ChangeToTrue/{id}")]
         public IActionResult ChangeToTrue(int id)
         {
-            return RedirectToAction("Index");
+            _guideService.TChangeToTrueByGuide(id);
+            return RedirectToAction("Index","Guide",new {area="Admin"});
         }
 
+        [Route("ChangeToFalse/{id}")]
         public IActionResult ChangeToFalse(int id)
         {
-            return RedirectToAction("Index");
+            _guideService.TChangeToFalseByGuide(id);
+            return RedirectToAction("Index", "Guide", new { area = "Admin" });
         }
     }
 }
