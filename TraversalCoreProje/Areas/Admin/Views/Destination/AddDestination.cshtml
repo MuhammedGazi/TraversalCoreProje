@@ -1,54 +1,34 @@
-﻿@model EntityLayer.Concrete.Destination
+﻿@model EntityLayer.Concrete.Guide
 @{
 	ViewData["Title"] = "AddDestination";
 	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Yeni Rota Oluşturma Sayfası</h1>
+<h1>Yeni Rehber Oluşturma Sayfası</h1>
 <form method="post">
 	<div class="form-group">
-		@Html.Label("Şehir")
+		@Html.Label("Ad Soyad")
 		<input type="text" asp-for="City" class="form-control" />
 	</div>
 	<br />
 	<div class="form-group">
-		@Html.Label("Gün Gece")
+		@Html.Label("Görsel")
 		<input type="text" asp-for="DayNight" class="form-control" />
 	</div>
 	<br />
 	<div class="form-group">
-		@Html.Label("Fiyat")
+		@Html.Label("Instagram Url")
 		<input type="text" asp-for="Price" class="form-control" />
 	</div>
 	<br />
 	<div class="form-group">
-		@Html.Label("Ana Görsel")
+		@Html.Label("Twitter Url")
 		<input type="text" asp-for="Image" class="form-control" />
 	</div>
 	<br />
 		<div class="form-group">
-		@Html.Label("Kapasite")
+		@Html.Label("Açıklama")
 		<input type="text" asp-for="Capacity" class="form-control" />
-	</div>
-	<br />
-	<div class="form-group">
-		@Html.Label("Kapak Görseli")
-		<input type="text" asp-for="CoverImage" class="form-control" />
-	</div>
-	<br />
-	<div class="form-group">
-		@Html.Label("Görsel 2")
-		<input type="text" asp-for="Image2" class="form-control" />
-	</div>
-	<br />
-	<div class="form-group">
-		@Html.Label("Detay 1")
-		<textarea cols="30" rows="5" class="form-control" asp-for="Detail1"></textarea>
-	</div>
-	<br />
-	<div class="form-group">
-		@Html.Label("Detay 2")
-		<textarea cols="30" rows="5" class="form-control" asp-for="Detail2"></textarea>
 	</div>
 	<br />
 	<button class="btn btn-outline-primary">Oluştur</button>

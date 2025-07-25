@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Concrete;
+﻿using BusinessLayer.Abstract;
+using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
@@ -10,10 +11,16 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
     //[AllowAnonymous]
     public class DestinationController : Controller
     {
-        DestinationManager destinationManager=new DestinationManager(new EfDestinationDal());
+        private readonly IDestinationService _destinationService;
+
+        public DestinationController(IDestinationService destinationService)
+        {
+            _destinationService = destinationService;
+        }
+
         public IActionResult Index()
         {
-            var values = destinationManager.TGetList();
+            var values = _destinationService.TGetList();
             return View(values);
         }
 
@@ -26,28 +33,28 @@ namespace TraversalCoreProje.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddDestination(Destination p)
         {
-            destinationManager.TAdd(p);
+            _destinationService.TAdd(p);
             return RedirectToAction("Index");
         }
 
         public IActionResult DeleteDestination(int id)
         {
-            var value=destinationManager.TGetByID(id);
-            destinationManager.TDelete(value);
+            var value=_destinationService.TGetByID(id);
+            _destinationService.TDelete(value);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult Updatedestination(int id)
         {
-            var value = destinationManager.TGetByID(id);
+            var value = _destinationService.TGetByID(id);
             return View(value);
         }
 
         [HttpPost]
         public IActionResult Updatedestination(Destination p)
         {
-            destinationManager.TUpdate(p);
+            _destinationService.TUpdate(p);
             return RedirectToAction("Index");
         }
     }

@@ -7,9 +7,7 @@ using EntityLayer.Concrete;
 
 namespace BusinessLayer.Abstract
 {
-    public interface ICommentService:IGenericService<Comment>
+    public interface IAppUserService:IGenericService<AppUser>
     {
-        List<Comment> TGetDestinationByID(int id);
-        List<Comment> TGetListCommentWithDestination();
     }
 }
