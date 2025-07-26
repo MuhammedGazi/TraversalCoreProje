@@ -11,6 +11,7 @@
         <th>#</th>
         <th>Başlık</th>
         <th>İçerik</th>
+        <th>Sil</th>
         <th>Detaylar</th>
     </tr>
     @foreach (var item in Model)
@@ -19,8 +20,10 @@
             <td>@item.AnnouncementID</td>
             <td>@item.Title</td>
             <td>@item.Content</td>
+            <td><a href="/Admin/Announcement/DeleteAnnouncement/@item.AnnouncementID" class="btn btn-outline-danger">Sil</a></td>
+            <td><a href="/Admin/Announcement/UpdateAnnouncement/@item.AnnouncementID" class="btn btn-outline-success">Güncelle</a></td>
             <td><a href="#" class="btn btn-outline-info">Detay Gör</a></td>
         </tr>
     }
 </table>
-
+<a href="/Admin/Announcement/AddAnnouncement/" class="btn btn-outline-dark">Yeni Duyuru Girişi</a>

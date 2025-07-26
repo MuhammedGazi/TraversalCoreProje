@@ -24,6 +24,8 @@ namespace TraversalCoreProje.Mapping.AutoMapperProfile
 
             CreateMap<AnnouncementListDTO,Announcement>().ReverseMap();
 
+            CreateMap<AnnouncementUpdateDTO,Announcement>().ReverseMap();
+
         }
     }
 }

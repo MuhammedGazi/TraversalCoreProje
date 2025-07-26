@@ -1,18 +1,9 @@
-using BusinessLayer.Abstract;
-using BusinessLayer.Concrete;
 using BusinessLayer.Container;
-using BusinessLayer.ValidationRules;
-using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
-using DataAccessLayer.EntityFramework;
-using DTOLayer.DTOs.AnnouncementDTOs;
 using EntityLayer.Concrete;
-using FluentValidation;
-using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using OfficeOpenXml;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -59,11 +50,12 @@ builder.Services.AddLogging(x =>
     x.AddDebug();
 });
 
+builder.Services.AddHttpClient();
+
 //builder.Services.AddAutoMapper(typeof(Startup));  eski yöntemi bu alta yenisi
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 //builder.Services.AddTransient<IValidator<AnnouncementAddDTO>, AnnouncementValidator>();  extensiona götürdüm aþaðýda caðýrdým
 builder.Services.CustomValidator();
-
 builder.Services.AddControllersWithViews();
 
 //builder.Services.AddMvc(config =>
