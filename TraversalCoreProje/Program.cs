@@ -1,10 +1,12 @@
 using BusinessLayer.Container;
 using DataAccessLayer.Concrete;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Serilog;
+using TraversalCoreProje.CQRS.Handlers.DestinationHandlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,10 +28,12 @@ builder.Host.UseSerilog();
 builder.Services.AddControllersWithViews(config =>
 {
     var policy = new AuthorizationPolicyBuilder()
-        .RequireAuthenticatedUser()
+    .RequireAuthenticatedUser()
         .Build();
     config.Filters.Add(new AuthorizeFilter(policy));
 });
+
+builder.Services.AddScoped<GetAllDestinationQueryHandler>();
 
 builder.Services.AddDbContext<Context>();
 builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>();
