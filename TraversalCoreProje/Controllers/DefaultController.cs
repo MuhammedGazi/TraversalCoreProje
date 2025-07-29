@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TraversalCoreProje.Controllers
 {
+    [AllowAnonymous]
     public class DefaultController : Controller
     {
         public IActionResult Index()
