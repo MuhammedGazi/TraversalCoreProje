@@ -13,7 +13,7 @@ namespace TraversalCoreProje.CQRS.Handlers.DestinationHandlers
             _context = context;
         }
 
-        public List<GetAllDestinationQueryResult> Handler()
+        public List<GetAllDestinationQueryResult> Handle()
         {
             var values = _context.Destinations.Select(x => new GetAllDestinationQueryResult
             {
