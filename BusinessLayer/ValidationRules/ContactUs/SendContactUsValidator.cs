@@ -13,6 +13,7 @@ namespace BusinessLayer.ValidationRules.ContactUs
         public SendContactUsValidator()
         {
             RuleFor(x => x.Mail).NotEmpty().WithMessage("Mail Boş Bırakılamaz");
+            RuleFor(x => x.Mail).EmailAddress().WithMessage("Doğru Maili Girmeniz Gerekmektedir");
             RuleFor(x => x.Subject).NotEmpty().WithMessage("Konu Alanı Boş Bırakılamaz");
             RuleFor(x => x.Name).NotEmpty().WithMessage("İsim Alanı Boş Bırakılamaz");
             RuleFor(x => x.MessageBody).NotEmpty().WithMessage("Mesaj Alanı Boş Bırakılamaz");
